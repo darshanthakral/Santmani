@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Santmani</string>
+    <string name="logo">Santmani Logo</string>
+
+    <string name="menu_reload">Reload</string>
+    <string name="menu_forward">Forward</string>
+</resources>
