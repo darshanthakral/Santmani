@@ -1,30 +1,30 @@
 package com.example.santmani;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.content.Context;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String url;
     private WebView webView;
     private ProgressBar progressBar;
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Santmani");
         getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.action_bar_bg));
 
-        url = "https://santmani.in/";
+        String url = "https://santmani.in/";
         webView = findViewById(R.id.webView);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setMax(100);
@@ -59,6 +59,76 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 progressBar.setProgress(100);
             }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                /*return super.shouldOverrideUrlLoading(view, request);*/
+
+                final Uri uri = request.getUrl();
+                if (uri.toString().startsWith("mailto:")) {
+
+                    //Handle mail Urls
+                    startActivity(new Intent(Intent.ACTION_SENDTO, uri));
+                } else if (uri.toString().startsWith("tel:")) {
+
+                    //Handle telephony Urls
+                    startActivity(new Intent(Intent.ACTION_DIAL, uri));
+                } else if (uri.toString().startsWith("https://www.facebook.com/")) {
+
+                    Intent facebook = new Intent(Intent.ACTION_VIEW, uri);
+                    facebook.setPackage("com.facebook.android");
+                    try {
+                        startActivity(facebook);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+                } else if (uri.toString().startsWith("https://twitter.com")) {
+
+                    Intent twitter = new Intent(Intent.ACTION_VIEW, uri);
+                    twitter.setPackage("com.twitter.android");
+                    try {
+                        startActivity(twitter);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+                } else if (uri.toString().startsWith("https://drive.google.com/")) {
+
+                    Intent drive = new Intent(Intent.ACTION_VIEW, uri);
+                    drive.setPackage("com.drive.google.android");
+                    try {
+                        startActivity(drive);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+                } else if (uri.toString().startsWith("https://api.whatsapp.com/")) {
+
+                    Intent whatsapp = new Intent(Intent.ACTION_VIEW, uri);
+                    whatsapp.setPackage("com.whatsapp.android");
+                    try {
+                        startActivity(whatsapp);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+                } else if (uri.toString().startsWith("https://www.google.com/maps")) {
+
+                    Intent maps = new Intent(Intent.ACTION_VIEW, uri);
+                    maps.setPackage("com.maps.android");
+                    try {
+                        startActivity(maps);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+                } else {
+                    //Handle Web Urls
+                    view.loadUrl(uri.toString());
+                }
+                return true;
+            }
         });
 
         webView.setWebChromeClient(new WebChromeClient() {
@@ -75,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
                 Objects.requireNonNull(getSupportActionBar()).setTitle(title);
             }
         });
+
+
     }
 
     @Override
