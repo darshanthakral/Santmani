@@ -4,9 +4,7 @@
     <item
         android:id="@+id/Reload"
         android:title="@string/menu_reload" />
-
     <item
         android:id="@+id/Forward"
         android:title="@string/menu_forward" />
-
 </menu>
