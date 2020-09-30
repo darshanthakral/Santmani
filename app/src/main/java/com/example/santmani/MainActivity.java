@@ -191,5 +191,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Cant go forward!", Toast.LENGTH_LONG).show();
         }
     }
-
 }
