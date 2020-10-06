@@ -152,10 +152,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
+            //super.onBackPressed();
             finish();
         }
     }
@@ -181,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.Help:
                 Intent intent = new Intent(getApplicationContext(), Activity_About.class);
-                finish();
                 startActivity(intent);
                 break;
         }

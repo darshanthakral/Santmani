@@ -74,15 +74,20 @@ public class Activity_About extends AppCompatActivity {
         });
     }
 
+    private void callReview() {
+        Task<Void> flow = manager.launchReviewFlow(Activity_About.this, reviewInfo);
+        flow.addOnCompleteListener(task -> {
+            // The flow has finished. The API does not indicate whether the user
+            // reviewed or not, or even whether the review dialog was shown. Thus, no
+            // matter the result, we continue our app flow.
+        });
+    }
+
+
     @Override
     public void onBackPressed() {
         if (reviewInfo != null) {
-            Task<Void> flow = manager.launchReviewFlow(Activity_About.this, reviewInfo);
-            flow.addOnCompleteListener(task -> {
-                // The flow has finished. The API does not indicate whether the user
-                // reviewed or not, or even whether the review dialog was shown. Thus, no
-                // matter the result, we continue our app flow.
-            });
+            callReview();
         }
         super.onBackPressed();
     }
