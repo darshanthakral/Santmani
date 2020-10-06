@@ -29,6 +29,7 @@
             android:name=".MainActivity"
             android:configChanges="orientation|keyboard|screenSize" />
 
+        <activity android:name=".Activity_About" />
     </application>
 
 </manifest>

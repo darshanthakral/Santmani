@@ -2,6 +2,30 @@
     <string name="app_name">Santmani</string>
     <string name="logo">Santmani Logo</string>
 
-    <string name="menu_reload">Reload</string>
     <string name="menu_forward">Forward</string>
+    <string name="menu_refresh">Reload</string>
+    <string name="menu_help">Help</string>
+
+    //About Head
+    <string name="about_head_img">Img</string>
+
+    //About Body
+    <string name="about_body">The app is a One-Stop-Shop e-commerce
+        store selling religious goods.\n\n
+
+        The company always believed in the slogan i.e “Santo Ke Ashirvad Se”.
+        let god always bless us and our company through the blessings of Sant
+        to achieve every height of success.
+</string>
+
+    //Send Feedback
+    <string name="img_feedback">Email</string>
+    <string name="feedback_email">contact@santmani.in</string>
+
+    //Share App
+    <string name="share_me">Share this App</string>
+    <string name="img_share">Share</string>
+
+    //App Version
+    <string name="app_version">Version</string>
 </resources>

@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -28,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private ProgressBar progressBar;
 
+
+    //Normal Code
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Santmani");
         getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.action_bar_bg));
+
 
         String url = "https://santmani.in/";
         webView = findViewById(R.id.webView);
@@ -146,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
@@ -161,9 +162,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 
     @Override
@@ -177,7 +177,13 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.Reload:
                 webView.reload();
+                break;
 
+            case R.id.Help:
+                Intent intent = new Intent(getApplicationContext(), Activity_About.class);
+                finish();
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
 
@@ -191,4 +197,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Cant go forward!", Toast.LENGTH_LONG).show();
         }
     }
+
 }
