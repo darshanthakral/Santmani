@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(String.valueOf(uri))));
                     }
-                } else if (uri.toString().startsWith("https://www.google.com/maps")) {
+                } else if (uri.toString().startsWith("https://www.google.com/maps/")) {
 
                     Intent maps = new Intent(Intent.ACTION_VIEW, uri);
                     maps.setPackage("com.maps.android");
@@ -125,6 +125,51 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(String.valueOf(uri))));
                     }
+
+                } else if (uri.toString().startsWith("https://play.google.com/")) {
+
+                    Intent playConsole = new Intent(Intent.ACTION_VIEW, uri);
+                    playConsole.setPackage("com.android.application");
+                    try {
+                        startActivity(playConsole);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+
+                } else if (uri.toString().startsWith("https://www.instagram.com/")) {
+
+                    Intent playConsole = new Intent(Intent.ACTION_VIEW, uri);
+                    playConsole.setPackage("com.instagram.android");
+                    try {
+                        startActivity(playConsole);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+
+                } else if (uri.toString().startsWith("https://www.linkedin.com/")) {
+
+                    Intent playConsole = new Intent(Intent.ACTION_VIEW, uri);
+                    playConsole.setPackage("com.linkedin.android");
+                    try {
+                        startActivity(playConsole);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+
+                } else if (uri.toString().startsWith("https://github.com/")) {
+
+                    Intent playConsole = new Intent(Intent.ACTION_VIEW, uri);
+                    playConsole.setPackage("com.github.android");
+                    try {
+                        startActivity(playConsole);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(String.valueOf(uri))));
+                    }
+
                 } else {
                     //Handle Web Urls
                     view.loadUrl(uri.toString());
@@ -197,5 +242,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Cant go forward!", Toast.LENGTH_LONG).show();
         }
     }
-
 }
