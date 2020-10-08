@@ -1,12 +1,16 @@
 package com.example.santmani;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
@@ -26,6 +30,7 @@ public class Activity_About extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__about);
         Objects.requireNonNull(getSupportActionBar()).setTitle("About");
+        getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.action_bar_bg));
 
         //Calling method for In-App Review
         initReviewInfo();
@@ -38,7 +43,16 @@ public class Activity_About extends AppCompatActivity {
 
         //App_Version
         TextView versionName = findViewById(R.id.app_version);
-        versionName.setText(String.format("Version %s", BuildConfig.VERSION_NAME));
+
+        Context context = getApplicationContext();
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            String version = packageInfo.versionName;
+            versionName.setText(String.format("Version %s", version));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void feedback_email() {
